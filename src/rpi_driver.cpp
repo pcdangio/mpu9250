@@ -51,7 +51,7 @@ void rpi_driver::start()
 void rpi_driver::stop()
 {
     // Disable pigpio interrupt.
-    gpioSetISRFuncEx(rpi_driver::m_interrupt_pin, RISING_EDGE, std::numeric_limits<int32_t>::max(), nullptr, nullptr);
+    gpioSetISRFuncEx(rpi_driver::m_interrupt_pin, RISING_EDGE, std::numeric_limits<int32_t>::max(), nullptr, this);
 }
 
 // OVERRIDES
@@ -274,7 +274,7 @@ void rpi_driver::read_registers(int32_t handle, uint8_t start_address, uint8_t l
 void rpi_driver::interrupt(int32_t pin, int32_t level, uint32_t timestamp, void* data)
 {
     // Validate level and data.
-    if(level == PI_HIGH && data)
+    if(level == PI_HIGH)
     {
         // Cast rpi_driver pointer to base driver.
         mpu9250::driver* driver = reinterpret_cast<mpu9250::driver*>(data);
