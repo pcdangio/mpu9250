@@ -7,7 +7,8 @@ project(mpu9250
 
 # Create library.
 add_library(mpu9250 STATIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/driver.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/driver.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/rpi_driver.cpp)
 
 # Set include directories for internal/external use.
 target_include_directories(mpu9250 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
