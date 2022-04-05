@@ -273,5 +273,13 @@ void rpi_driver::read_registers(int32_t handle, uint8_t start_address, uint8_t l
 // CALLBACKS
 void rpi_driver::interrupt(int32_t pin, int32_t level, uint32_t timestamp, void* data)
 {
+    // Validate level and data.
+    if(level == PI_HIGH && data)
+    {
+        // Cast rpi_driver pointer to base driver.
+        mpu9250::driver* driver = reinterpret_cast<mpu9250::driver*>(data);
 
+        // Instruct the driver to read the latest measurement.
+        driver->read_measurement();
+    }
 }
