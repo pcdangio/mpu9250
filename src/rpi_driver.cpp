@@ -31,7 +31,9 @@ void rpi_driver::start()
     {
         case 0:
         {
-            // Do nothing, succeeded.
+            // Interrupt is currently latched waiting for a read.
+            // Perform first read manually to kick off interrupt/read chain.
+            rpi_driver::driver::read_measurement();
             break;
         }
         case PI_BAD_GPIO:
